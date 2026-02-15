@@ -6,29 +6,18 @@ import { Label } from '@/react-app/components/ui/label';
 import { Loader2 } from 'lucide-react';
 
 const WILAYAS = [
-  // الولايات الكبرى أولاً
   'الجزائر', 'وهران', 'قسنطينة', 'عنابة', 'البليدة', 'باتنة', 'سطيف', 'سيدي بلعباس', 'بسكرة', 'تلمسان',
-  // باقي الولايات
   'أدرار', 'الأغواط', 'أم البواقي', 'بجاية', 'بشار', 'البويرة', 'بومرداس', 'برج بوعريريج',
   'تبسة', 'تيارت', 'تيزي وزو', 'تيبازة', 'تيسمسيلت', 'تندوف', 'تيميمون',
-  'الجلفة', 'جانت', 'جيجل',
-  'خنشلة',
-  'سعيدة', 'سكيكدة', 'سوق أهراس',
-  'الشلف',
-  'الطارف',
-  'عين الدفلى', 'عين تموشنت', 'عين صالح', 'عين قزام',
-  'غرداية', 'غليزان',
-  'قالمة',
-  'مستغانم', 'المسيلة', 'معسكر', 'ميلة', 'المدية', 'المغير', 'المنيعة',
-  'النعامة',
-  'الوادي', 'ورقلة',
-  'إليزي', 'أولاد جلال',
-  'البيض', 'بني عباس', 'برج باجي مختار',
+  'الجلفة', 'جانت', 'جيجل', 'خنشلة', 'سعيدة', 'سكيكدة', 'سوق أهراس',
+  'الشلف', 'الطارف', 'عين الدفلى', 'عين تموشنت', 'عين صالح', 'عين قزام',
+  'غرداية', 'غليزان', 'قالمة', 'مستغانم', 'المسيلة', 'معسكر', 'ميلة', 'المدية', 'المغير', 'المنيعة',
+  'النعامة', 'الوادي', 'ورقلة', 'إليزي', 'أولاد جلال', 'البيض', 'بني عباس', 'برج باجي مختار',
   'تمنراست', 'تقرت'
 ];
 
-const TELEGRAM_BOT_TOKEN = '8028024261:AAGqUaxed7tsD7PoMb1gQ9QPeVp6tGC8JlQ';
-const TELEGRAM_CHAT_ID = '-1003776870179';
+// نصيحة: استبدل هذه الروابط بروابط صورك بعد رفعها على موقع مثل PostImages
+const PRODUCT_IMAGE = "https://i.postimg.cc/mD8z7B3y/Screenshot-20260214-031821-Gallery.jpg"; 
 
 export default function Home() {
   const [fullName, setFullName] = useState('');
@@ -41,163 +30,83 @@ export default function Home() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const message = `طلب جديد 🌸
-الاسم: ${fullName}
-الولاية: ${wilaya}
-رقم الهاتف: ${phone}`;
+    const message = `🌸 طلب جديد من Atlasio 🌸\n👤 الاسم: ${fullName}\n📍 الولاية: ${wilaya}\n📞 الهاتف: ${phone}\n💰 السعر: 2400 دج (شامل التوصيل)`;
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot8028024261:AAGqUaxed7tsD7PoMb1gQ9QPeVp6tGC8JlQ/sendMessage`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
+          chat_id: '-1003776870179',
           text: message,
         }),
       });
-
-      if (response.ok) {
-        setSubmitted(true);
-        setFullName('');
-        setWilaya('');
-        setPhone('');
-      } else {
-        alert('حدث خطأ. يرجى المحاولة مرة أخرى.');
-      }
+      setSubmitted(true);
     } catch (error) {
-      alert('حدث خطأ. يرجى المحاولة مرة أخرى.');
+      alert('حدث خطأ في الإرسال، يرجى المحاولة لاحقاً');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(https://019c59e5-a441-7ab2-aa7d-eeda79331ce2.mochausercontent.com/flower-background.png)',
-        }}
-      >
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
-      </div>
+    <div className="min-h-screen bg-gray-50 font-sans" dir="rtl">
+      <div className="container mx-auto px-4 py-6 max-w-md">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-pink-100 p-6">
+          <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
+            حوّل شرفتك إلى حديقة ملونة خلال أسابيع! 🌸
+          </h1>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          {/* Form Section */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-8 border border-pink-100">
-            <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-gray-800" dir="rtl">
-              حوّل شرفتك إلى حديقة ملونة خلال أسابيع! 🌸
-            </h1>
-
-            {/* Product Image - Mobile */}
-            <div className="md:hidden mb-6 w-full">
-              <img 
-                src="https://019c59e5-a441-7ab2-aa7d-eeda79331ce2.mochausercontent.com/Screenshot_20260214-031821_Gallery.jpg"
-                alt="باك الربيع الملكي"
-                className="rounded-xl shadow-lg w-full h-auto object-contain"
-                style={{ maxHeight: '400px' }}
-              />
-            </div>
-
-            {submitted ? (
-              <div className="text-center py-8">
-                <div className="text-5xl mb-4">✅</div>
-                <h2 className="text-xl font-semibold text-green-600 mb-2" dir="rtl">تم استلام طلبك!</h2>
-                <p className="text-gray-600" dir="rtl">سنتصل بك قريباً</p>
-                <Button 
-                  onClick={() => setSubmitted(false)}
-                  className="mt-4 bg-pink-500 hover:bg-pink-600"
-                >
-                  طلب جديد
-                </Button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="fullName">الاسم الكامل</Label>
-                  <Input
-                    id="fullName"
-                    type="text"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    required
-                    placeholder="أدخل اسمك الكامل"
-                    className="text-right"
-                    dir="rtl"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="wilaya">الولاية</Label>
-                  <Select value={wilaya} onValueChange={setWilaya} required>
-                    <SelectTrigger id="wilaya" className="text-right" dir="rtl">
-                      <SelectValue placeholder="اختر الولاية" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {WILAYAS.map((w) => (
-                        <SelectItem key={w} value={w} className="text-right">
-                          {w}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">رقم الهاتف</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                    placeholder="0555 12 34 56"
-                    className="text-right"
-                    dir="rtl"
-                  />
-                </div>
-
-                <div className="text-center py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-                  <p className="text-base font-semibold text-gray-800" dir="rtl">
-                    سعر الباك: 1900 دج + توصيل 500 دج
-                  </p>
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold text-lg py-6"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      جاري الإرسال...
-                    </>
-                  ) : (
-                    'اطلب باكك الآن'
-                  )}
-                </Button>
-
-                <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
-                  الدفع عند الاستلام. البذور أصلية وسريعة النمو.
-                </p>
-              </form>
-            )}
-          </div>
-
-          {/* Image Section - Desktop */}
-          <div className="hidden md:flex justify-center items-start sticky top-8">
+          {/* إصلاح الصورة المكسورة */}
+          <div className="mb-6">
             <img 
-              src="https://019c59e5-a441-7ab2-aa7d-eeda79331ce2.mochausercontent.com/Screenshot_20260214-031821_Gallery.jpg"
+              src={PRODUCT_IMAGE}
               alt="باك الربيع الملكي"
-              className="rounded-2xl shadow-2xl max-w-lg w-full object-contain"
+              className="rounded-2xl w-full h-auto shadow-md"
             />
           </div>
+
+          {submitted ? (
+            <div className="text-center py-10 animate-in fade-in zoom-in duration-300">
+              <div className="text-6xl mb-4">✅</div>
+              <h2 className="text-2xl font-bold text-green-600 mb-2">تم استلام طلبك!</h2>
+              <p className="text-gray-600 mb-6">سنتصل بك قريباً لتأكيد العنوان</p>
+              <Button onClick={() => setSubmitted(false)} className="w-full bg-pink-500 hover:bg-pink-600">طلب جديد</Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <Label className="block mb-2 text-gray-700">الاسم الكامل</Label>
+                <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required placeholder="أدخل اسمك الكامل" className="rounded-xl h-12" />
+              </div>
+
+              <div>
+                <Label className="block mb-2 text-gray-700">الولاية</Label>
+                <Select value={wilaya} onValueChange={setWilaya} required>
+                  <SelectTrigger className="rounded-xl h-12">
+                    <SelectValue placeholder="اختر ولايتك" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {WILAYAS.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label className="block mb-2 text-gray-700">رقم الهاتف</Label>
+                <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required placeholder="05/06/07XXXXXXXX" className="rounded-xl h-12" />
+              </div>
+
+              <div className="p-4 bg-green-50 border border-green-200 rounded-2xl text-center">
+                <p className="font-bold text-gray-800">سعر الباك: 1900 دج + توصيل 500 دج</p>
+              </div>
+
+              <Button type="submit" disabled={isSubmitting} className="w-full h-14 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-lg rounded-2xl shadow-lg">
+                {isSubmitting ? <Loader2 className="animate-spin" /> : 'اطلب باكك الآن'}
+              </Button>
+              <p className="text-center text-xs text-gray-500">الدفع عند الاستلام. بذور أصلية مضمونة.</p>
+            </form>
+          )}
         </div>
       </div>
     </div>
